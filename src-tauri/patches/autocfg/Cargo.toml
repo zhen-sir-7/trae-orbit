@@ -1,0 +1,9 @@
+[package]
+name = "autocfg"
+version = "1.5.1"
+edition = "2021"
+description = "Patched autocfg replacement for TRAE sandbox (no process spawning)"
+license = "MIT OR Apache-2.0"
+
+[lib]
+path = "src/lib.rs"

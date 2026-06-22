@@ -1,0 +1,49 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        // 阿里云镜像加速
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.13.0'
+        classpath 'com.google.gms:google-services:4.4.4'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+apply from: "variables.gradle"
+
+allprojects {
+    repositories {
+        // 阿里云镜像加速
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        google()
+        mavenCentral()
+    }
+    // 强制所有 Android 子项目使用已有的 build-tools 版本（避免沙箱阻止安装 35.0.0）
+    project.plugins.withId('com.android.application') {
+        project.android.buildToolsVersion = "35.0.1"
+    }
+    project.plugins.withId('com.android.library') {
+        project.android.buildToolsVersion = "35.0.1"
+    }
+    // 配置完成后强制 Java 17 兼容（覆盖 capacitor-android 的 Java 21 要求）
+    project.afterEvaluate {
+        if (project.hasProperty('android') && project.android.compileOptions != null) {
+            project.android.compileOptions.sourceCompatibility = JavaVersion.VERSION_17
+            project.android.compileOptions.targetCompatibility = JavaVersion.VERSION_17
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

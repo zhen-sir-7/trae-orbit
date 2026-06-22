@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.55;
+  font-weight: 400;
+  color: #1a1a1a;
+  background-color: #efeae0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  background-color: #efeae0;
+  /* 结构主义网格底纹 */
+  background-image:
+    linear-gradient(to right, rgba(26, 26, 26, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+/* 选区配色 */
+::selection {
+  background: #b85c38;
+  color: #faf7f1;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #efeae0;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9bc9c;
+  border: 2px solid #efeae0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b85c38;
+}
+
+@layer components {
+  /* 结构主义分隔线 */
+  .rule {
+    border-color: #1a1a1a;
+  }
+
+  /* 卡片基础 */
+  .surface {
+    background-color: #faf7f1;
+    border: 1px solid #1a1a1a;
+  }
+
+  /* 等宽小标签 */
+  .mono-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b6b66;
+  }
+
+  /* 大号衬线数字 */
+  .display-num {
+    font-family: "Fraunces", ui-serif, Georgia, serif;
+    font-feature-settings: "ss01", "ss02";
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+  }
+}
+
+/* 流动虚线动画（跨端接力） */
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+.dash-flow {
+  stroke-dasharray: 4 4;
+  animation: dash-flow 1s linear infinite;
+}
+
+/* 进度条流动光泽 */
+@keyframes progress-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.progress-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: progress-shimmer 2.2s linear infinite;
+}

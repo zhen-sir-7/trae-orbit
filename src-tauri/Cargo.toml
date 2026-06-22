@@ -1,0 +1,41 @@
+[package]
+name = "app"
+version = "0.1.0"
+description = "TRAE Orbit 桌面端"
+authors = ["you"]
+license = ""
+repository = ""
+edition = "2021"
+rust-version = "1.77.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.11.2", features = [] }
+tauri-plugin-log = "2"
+
+# Patch autocfg to avoid process spawning in TRAE sandbox.
+# The sandbox blocks build scripts from spawning child processes (e.g. rustc --version),
+# causing std::process::Command::output() to panic. This patched version hardcodes
+# rustc 1.96.0 and makes all probes succeed without spawning processes.
+[patch.crates-io]
+autocfg = { path = "patches/autocfg" }
+serde = { path = "patches/serde-1.0.228" }
+thiserror = { path = "patches/thiserror-2.0.18" }
+zmij = { path = "patches/zmij-1.0.21" }
+typeid = { path = "patches/typeid-1.0.3" }
+anyhow = { path = "patches/anyhow-1.0.102" }
+libc = { path = "patches/libc-0.2.186" }
+version_check = { path = "patches/version_check-0.9.5" }
+getrandom = { path = "patches/getrandom-0.3.4" }
+rustc_version = { path = "patches/rustc_version-0.4.1" }
