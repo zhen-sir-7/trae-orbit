@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRAE Orbit · 下载</title>
+<link rel="icon" href="favicon.svg">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --ink:#1A1A1A;--ink-soft:#4A4A4A;--ink-mute:#9CA3AF;
+    --sand-50:#FAFAF7;--sand-100:#F5F0E6;--sand-200:#EFEAE0;
+    --ochre:#B85C38;--ochre-light:#D9744A;
+    --moss:#4A7C59;--brick:#A04822;
+  }
+  body{
+    font-family:'Manrope','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+    background:var(--sand-200);color:var(--ink);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .container{max-width:720px;width:100%;padding:0 20px}
+  /* Hero */
+  .hero{text-align:center;padding:60px 0 40px}
+  .logo{display:inline-block;margin-bottom:16px}
+  .hero h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+  .hero .tagline{font-size:13px;color:var(--ochre);letter-spacing:3px;font-weight:600;text-transform:uppercase}
+  .hero .desc{font-size:15px;color:var(--ink-soft);margin-top:12px;line-height:1.6}
+  /* 下载卡片 */
+  .downloads{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+  @media(max-width:600px){.downloads{grid-template-columns:1fr}}
+  .card{
+    border:2px solid var(--ink);background:var(--sand-50);
+    padding:24px 20px;text-decoration:none;color:inherit;
+    transition:all 0.2s;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 0 -2px var(--ochre)}
+  .card-icon{
+    width:48px;height:48px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .card.accent .card-icon{border-color:var(--ochre);background:rgba(184,92,56,0.1)}
+  .card .badge{font-size:10px;color:var(--ochre);font-weight:700;letter-spacing:2px}
+  .card h2{font-size:20px;font-weight:700;margin:4px 0}
+  .card .role{font-size:12px;color:var(--ink-mute);margin-bottom:12px}
+  .card .meta{font-size:11px;color:var(--ink-mute);font-family:monospace;margin-top:auto;padding-top:12px;border-top:1px solid rgba(26,26,26,0.1)}
+  .card .size{font-weight:600;color:var(--ink-soft)}
+  .card .btn{
+    display:inline-block;margin-top:14px;padding:10px 16px;
+    background:var(--ink);color:var(--sand-50);font-size:13px;
+    font-weight:600;text-align:center;border:2px solid var(--ink);
+    transition:all 0.2s;
+  }
+  .card:hover .btn{background:var(--ochre);border-color:var(--ochre)}
+  /* 说明 */
+  .guide{margin-top:40px;border:2px solid rgba(26,26,26,0.15);background:var(--sand-50);padding:24px}
+  .guide h3{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .guide ol{padding-left:20px;font-size:13px;color:var(--ink-soft);line-height:1.8}
+  .guide ol li{margin-bottom:4px}
+  .guide ol li strong{color:var(--ink)}
+  /* 底部 */
+  .footer{text-align:center;padding:40px 0 32px;font-size:11px;color:var(--ink-mute)}
+  .footer a{color:var(--ochre);text-decoration:none}
+  .footer a:hover{text-decoration:underline}
+  .made-with{font-family:monospace;letter-spacing:1px;margin-top:8px}
+  /* 架构示意 */
+  .arch{margin-top:32px;text-align:center}
+  .arch-flow{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft)}
+  .arch-node{padding:6px 14px;border:1.5px solid var(--ink);background:var(--sand-100);font-weight:600}
+  .arch-arrow{color:var(--ochre);font-weight:700}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="logo">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <defs>
+          <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#F5F0E6"/><stop offset="100%" stop-color="#E8DFD0"/>
+          </radialGradient>
+          <radialGradient id="core" cx="35%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#D9744A"/><stop offset="100%" stop-color="#A04822"/>
+          </radialGradient>
+        </defs>
+        <rect width="64" height="64" rx="12" fill="url(#bg)"/>
+        <circle cx="32" cy="32" r="21" fill="none" stroke="#1A1A1A" stroke-width="2.5" opacity="0.85"/>
+        <circle cx="32" cy="32" r="14" fill="none" stroke="#1A1A1A" stroke-width="0.8" opacity="0.2"/>
+        <circle cx="32" cy="11" r="2.8" fill="#1A1A1A"/>
+        <circle cx="53" cy="32" r="2.8" fill="#1A1A1A"/>
+        <circle cx="32" cy="53" r="2.8" fill="#1A1A1A"/>
+        <circle cx="11" cy="32" r="2.8" fill="#1A1A1A"/>
+        <circle cx="32" cy="32" r="6.5" fill="url(#core)"/>
+      </svg>
+    </div>
+    <h1>TRAE Orbit</h1>
+    <div class="tagline">AI · FOLLOWS · YOU</div>
+    <p class="desc">AI 随人走，算力随任务动。<br>手机发起任务，电脑执行任务，跨端胶囊调度。</p>
+  </div>
+
+  <!-- 架构示意 -->
+  <div class="arch">
+    <div class="arch-flow">
+      <span class="arch-node">手机端</span>
+      <span class="arch-arrow">→</span>
+      <span class="arch-node" style="border-color:var(--ochre);color:var(--ochre)">后端调度</span>
+      <span class="arch-arrow">→</span>
+      <span class="arch-node">电脑端</span>
+    </div>
+  </div>
+
+  <!-- 下载卡片 -->
+  <div class="downloads">
+    <!-- Windows -->
+    <a class="card accent" href="https://github.com/zhen-sir-7/trae-orbit/releases/download/v0.1.0/trae-orbit_0.1.0_x64-setup.exe">
+      <div class="card-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <div class="badge">WINDOWS</div>
+      <h2>电脑端</h2>
+      <div class="role">执行端 · 接入 TRAE/CC</div>
+      <div class="meta">
+        <div>trae-orbit_0.1.0_x64-setup.exe</div>
+        <div class="size">大小：2.71 MB · NSIS 安装包</div>
+      </div>
+      <div class="btn">下载 EXE</div>
+    </a>
+
+    <!-- Android -->
+    <a class="card" href="https://github.com/zhen-sir-7/trae-orbit/releases/download/v0.1.0/app-debug.apk">
+      <div class="card-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
+          <rect x="5" y="2" width="14" height="20" rx="2"/>
+          <line x1="12" y1="18" x2="12" y2="18"/>
+        </svg>
+      </div>
+      <div class="badge">ANDROID</div>
+      <h2>手机端</h2>
+      <div class="role">随身入口 · 发起任务</div>
+      <div class="meta">
+        <div>app-debug.apk</div>
+        <div class="size">大小：4.82 MB · Debug 签名</div>
+      </div>
+      <div class="btn">下载 APK</div>
+    </a>
+  </div>
+
+  <!-- 使用指南 -->
+  <div class="guide">
+    <h3>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12" y2="8"/>
+      </svg>
+      使用步骤
+    </h3>
+    <ol>
+      <li><strong>安装电脑端：</strong>下载 EXE 并安装，启动后自动运行后端服务</li>
+      <li><strong>安装手机端：</strong>下载 APK，允许"未知来源"安装</li>
+      <li><strong>连接：</strong>手机和电脑连同一 WiFi，打开 App 自动发现后端</li>
+      <li><strong>使用：</strong>手机端发起任务胶囊，电脑端自动执行</li>
+    </ol>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div>v0.1.0 · <a href="https://github.com/zhen-sir-7/trae-orbit">GitHub 仓库</a> · <a href="https://github.com/zhen-sir-7/trae-orbit/releases">所有版本</a></div>
+    <div class="made-with">Made with TRAE</div>
+  </div>
+</div>
+</body>
+</html>
