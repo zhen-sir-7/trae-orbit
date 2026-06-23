@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRAE Orbit · 下载</title>
+<title>TRAE Orbit · AI 随人走，算力随任务动</title>
 <link rel="icon" href="favicon.svg">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -13,68 +13,184 @@
     --ochre:#B85C38;--ochre-light:#D9744A;
     --moss:#4A7C59;--brick:#A04822;
   }
+  html{scroll-behavior:smooth}
   body{
     font-family:'Manrope','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
-    background:var(--sand-200);color:var(--ink);min-height:100vh;
-    display:flex;flex-direction:column;align-items:center;
+    background:var(--sand-200);color:var(--ink);line-height:1.6;
   }
-  .container{max-width:720px;width:100%;padding:0 20px}
+  .container{max-width:880px;margin:0 auto;padding:0 20px}
+  /* 顶栏 */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(239,234,224,0.95);
+    backdrop-filter:blur(8px);border-bottom:1px solid rgba(26,26,26,0.1);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:880px;margin:0 auto;padding:0 20px}
+  .nav-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}
+  .nav-links{display:flex;gap:20px;font-size:13px}
+  .nav-links a{color:var(--ink-mute);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--ochre)}
+  @media(max-width:600px){.nav-links{display:none}}
   /* Hero */
-  .hero{text-align:center;padding:60px 0 40px}
-  .logo{display:inline-block;margin-bottom:16px}
-  .hero h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
-  .hero .tagline{font-size:13px;color:var(--ochre);letter-spacing:3px;font-weight:600;text-transform:uppercase}
-  .hero .desc{font-size:15px;color:var(--ink-soft);margin-top:12px;line-height:1.6}
-  /* 下载卡片 */
-  .downloads{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-  @media(max-width:600px){.downloads{grid-template-columns:1fr}}
-  .card{
-    border:2px solid var(--ink);background:var(--sand-50);
-    padding:24px 20px;text-decoration:none;color:inherit;
-    transition:all 0.2s;display:flex;flex-direction:column;
+  .hero{text-align:center;padding:80px 0 60px;position:relative;overflow:hidden}
+  .hero::before{
+    content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;
+    background:radial-gradient(circle,rgba(184,92,56,0.06) 0%,transparent 70%);
+    pointer-events:none;
   }
-  .card:hover{transform:translateY(-2px);box-shadow:0 8px 0 -2px var(--ochre)}
-  .card-icon{
-    width:48px;height:48px;border:2px solid var(--ink);
-    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  .hero .logo{display:inline-block;margin-bottom:20px}
+  .hero h1{font-size:42px;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;position:relative}
+  .hero h1 .accent{color:var(--ochre)}
+  .hero .tagline{font-size:13px;color:var(--ochre);letter-spacing:4px;font-weight:700;text-transform:uppercase;margin-bottom:20px}
+  .hero .desc{font-size:17px;color:var(--ink-soft);max-width:560px;margin:0 auto;line-height:1.7}
+  .hero-cta{margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+    background:var(--ink);color:var(--sand-50);text-decoration:none;
+    font-size:14px;font-weight:600;border:2px solid var(--ink);transition:all 0.2s;
   }
-  .card.accent .card-icon{border-color:var(--ochre);background:rgba(184,92,56,0.1)}
-  .card .badge{font-size:10px;color:var(--ochre);font-weight:700;letter-spacing:2px}
-  .card h2{font-size:20px;font-weight:700;margin:4px 0}
-  .card .role{font-size:12px;color:var(--ink-mute);margin-bottom:12px}
-  .card .meta{font-size:11px;color:var(--ink-mute);font-family:monospace;margin-top:auto;padding-top:12px;border-top:1px solid rgba(26,26,26,0.1)}
-  .card .size{font-weight:600;color:var(--ink-soft)}
-  .card .btn{
-    display:inline-block;margin-top:14px;padding:10px 16px;
-    background:var(--ink);color:var(--sand-50);font-size:13px;
-    font-weight:600;text-align:center;border:2px solid var(--ink);
-    transition:all 0.2s;
+  .btn-primary:hover{background:var(--ochre);border-color:var(--ochre);transform:translateY(-1px)}
+  .btn-secondary{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+    background:transparent;color:var(--ink);text-decoration:none;
+    font-size:14px;font-weight:600;border:2px solid var(--ink);transition:all 0.2s;
   }
-  .card:hover .btn{background:var(--ochre);border-color:var(--ochre)}
-  /* 说明 */
-  .guide{margin-top:40px;border:2px solid rgba(26,26,26,0.15);background:var(--sand-50);padding:24px}
-  .guide h3{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-  .guide ol{padding-left:20px;font-size:13px;color:var(--ink-soft);line-height:1.8}
-  .guide ol li{margin-bottom:4px}
-  .guide ol li strong{color:var(--ink)}
+  .btn-secondary:hover{background:var(--ink);color:var(--sand-50)}
+  /* 章节标题 */
+  .section{padding:60px 0}
+  .section-title{
+    font-size:13px;color:var(--ochre);letter-spacing:3px;font-weight:700;
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  .section-heading{font-size:28px;font-weight:700;letter-spacing:-0.02em;margin-bottom:32px}
+  /* 架构 */
+  .arch-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:700px){.arch-grid{grid-template-columns:1fr}}
+  .arch-card{
+    border:2px solid var(--ink);background:var(--sand-50);padding:24px 20px;
+    transition:all 0.2s;position:relative;
+  }
+  .arch-card:hover{transform:translateY(-2px);box-shadow:4px 4px 0 var(--ochre)}
+  .arch-card.center{background:var(--ink);color:var(--sand-50)}
+  .arch-card.center .arch-badge{color:var(--ochre-light)}
+  .arch-card.center .arch-role{color:var(--sand-200)}
+  .arch-card.center .arch-points li{color:var(--sand-100)}
+  .arch-card.center .arch-points li::before{background:var(--ochre-light)}
+  .arch-icon{
+    width:44px;height:44px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  }
+  .arch-card.center .arch-icon{border-color:var(--ochre);background:rgba(217,116,74,0.15)}
+  .arch-badge{font-size:10px;color:var(--ochre);font-weight:700;letter-spacing:2px}
+  .arch-card h3{font-size:18px;font-weight:700;margin:4px 0}
+  .arch-role{font-size:12px;color:var(--ink-mute);margin-bottom:14px}
+  .arch-points{list-style:none;font-size:12px;color:var(--ink-soft)}
+  .arch-points li{padding-left:14px;position:relative;margin-bottom:6px}
+  .arch-points li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--ochre)}
+  .arch-tech{margin-top:12px;padding-top:10px;border-top:1px solid rgba(26,26,26,0.1);font-size:10px;color:var(--ink-mute);font-family:monospace}
+  .arch-card.center .arch-tech{border-top-color:rgba(245,240,230,0.2);color:var(--sand-200)}
+  /* 功能 */
+  .features{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:700px){.features{grid-template-columns:1fr}}
+  .feature{
+    border:1.5px solid rgba(26,26,26,0.15);background:var(--sand-50);
+    padding:20px;transition:all 0.2s;
+  }
+  .feature:hover{border-color:var(--ochre);transform:translateY(-1px)}
+  .feature-icon{
+    width:36px;height:36px;background:rgba(184,92,56,0.1);
+    display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+  }
+  .feature h4{font-size:15px;font-weight:700;margin-bottom:6px}
+  .feature p{font-size:13px;color:var(--ink-soft);line-height:1.6}
+  /* 场景 */
+  .scenario{
+    background:var(--sand-50);border:2px solid var(--ink);padding:32px;
+    position:relative;overflow:hidden;
+  }
+  .scenario::before{
+    content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;
+    border:2px solid var(--ochre);border-radius:50%;opacity:0.1;
+  }
+  .scenario-steps{display:flex;flex-direction:column;gap:16px;margin-top:20px}
+  .step{display:flex;gap:16px;align-items:flex-start}
+  .step-num{
+    flex-shrink:0;width:32px;height:32px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:14px;background:var(--sand-100);
+  }
+  .step.active .step-num{background:var(--ochre);color:var(--sand-50);border-color:var(--ochre)}
+  .step-content h5{font-size:14px;font-weight:700;margin-bottom:2px}
+  .step-content p{font-size:13px;color:var(--ink-soft)}
+  /* 下载 */
+  .download-section{background:var(--sand-100);padding:60px 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .downloads{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+  @media(max-width:700px){.downloads{grid-template-columns:1fr}}
+  .dl-card{
+    border:2px solid var(--ink);background:var(--sand-50);padding:24px 20px;
+    text-decoration:none;color:inherit;transition:all 0.2s;display:flex;flex-direction:column;
+  }
+  .dl-card:hover{transform:translateY(-2px);box-shadow:4px 4px 0 var(--ochre)}
+  .dl-card-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .dl-icon{
+    width:44px;height:44px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .dl-card.accent .dl-icon{border-color:var(--ochre);background:rgba(184,92,56,0.1)}
+  .dl-badge{font-size:10px;color:var(--ochre);font-weight:700;letter-spacing:2px}
+  .dl-card h3{font-size:18px;font-weight:700;margin:2px 0}
+  .dl-role{font-size:12px;color:var(--ink-mute)}
+  .dl-meta{font-size:11px;color:var(--ink-mute);font-family:monospace;margin-top:auto;padding-top:12px;border-top:1px solid rgba(26,26,26,0.1)}
+  .dl-size{font-weight:600;color:var(--ink-soft)}
+  .dl-btn{
+    display:block;margin-top:14px;padding:10px 16px;text-align:center;
+    background:var(--ink);color:var(--sand-50);font-size:13px;font-weight:600;
+    border:2px solid var(--ink);transition:all 0.2s;
+  }
+  .dl-card:hover .dl-btn{background:var(--ochre);border-color:var(--ochre)}
+  /* 技术栈 */
+  .tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .tech-tag{
+    padding:6px 12px;border:1px solid rgba(26,26,26,0.2);background:var(--sand-50);
+    font-size:11px;font-family:monospace;color:var(--ink-soft);
+  }
   /* 底部 */
-  .footer{text-align:center;padding:40px 0 32px;font-size:11px;color:var(--ink-mute)}
-  .footer a{color:var(--ochre);text-decoration:none}
-  .footer a:hover{text-decoration:underline}
-  .made-with{font-family:monospace;letter-spacing:1px;margin-top:8px}
-  /* 架构示意 */
-  .arch{margin-top:32px;text-align:center}
-  .arch-flow{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft)}
-  .arch-node{padding:6px 14px;border:1.5px solid var(--ink);background:var(--sand-100);font-weight:600}
-  .arch-arrow{color:var(--ochre);font-weight:700}
+  footer{text-align:center;padding:48px 0 32px;font-size:12px;color:var(--ink-mute)}
+  footer a{color:var(--ochre);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .made-with{font-family:monospace;letter-spacing:1px;margin-top:8px;font-size:11px}
+  .footer-links{display:flex;gap:16;justify-content:center;gap:16px;margin-bottom:8px}
 </style>
 </head>
 <body>
-<div class="container">
-  <!-- Hero -->
-  <div class="hero">
+
+<!-- 顶栏 -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <svg width="22" height="22" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="21" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <circle cx="32" cy="32" r="6.5" fill="#B85C38"/>
+        <circle cx="32" cy="11" r="2.8" fill="#1A1A1A"/>
+        <circle cx="53" cy="32" r="2.8" fill="#1A1A1A"/>
+        <circle cx="32" cy="53" r="2.8" fill="#1A1A1A"/>
+        <circle cx="11" cy="32" r="2.8" fill="#1A1A1A"/>
+      </svg>
+      TRAE Orbit
+    </div>
+    <div class="nav-links">
+      <a href="#architecture">架构</a>
+      <a href="#features">功能</a>
+      <a href="#scenario">场景</a>
+      <a href="#download">下载</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
     <div class="logo">
-      <svg width="64" height="64" viewBox="0 0 64 64">
+      <svg width="72" height="72" viewBox="0 0 64 64">
         <defs>
           <radialGradient id="bg" cx="50%" cy="40%" r="70%">
             <stop offset="0%" stop-color="#F5F0E6"/><stop offset="100%" stop-color="#E8DFD0"/>
@@ -93,85 +209,312 @@
         <circle cx="32" cy="32" r="6.5" fill="url(#core)"/>
       </svg>
     </div>
-    <h1>TRAE Orbit</h1>
-    <div class="tagline">AI · FOLLOWS · YOU</div>
-    <p class="desc">AI 随人走，算力随任务动。<br>手机发起任务，电脑执行任务，跨端胶囊调度。</p>
-  </div>
-
-  <!-- 架构示意 -->
-  <div class="arch">
-    <div class="arch-flow">
-      <span class="arch-node">手机端</span>
-      <span class="arch-arrow">→</span>
-      <span class="arch-node" style="border-color:var(--ochre);color:var(--ochre)">后端调度</span>
-      <span class="arch-arrow">→</span>
-      <span class="arch-node">电脑端</span>
+    <h1>AI 随人走，算力<span class="accent">随任务动</span></h1>
+    <div class="tagline">TRAE ORBIT · AI FOLLOWS YOU</div>
+    <p class="desc">
+      跨端任务胶囊调度系统。手机发起任务，电脑执行任务，<br>
+      后端自动调度。任务胶囊跨端流转，同账号多端组建设备池。
+    </p>
+    <div class="hero-cta">
+      <a href="#download" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        下载安装包
+      </a>
+      <a href="https://github.com/zhen-sir-7/trae-orbit" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        查看源码
+      </a>
     </div>
   </div>
+</section>
 
-  <!-- 下载卡片 -->
-  <div class="downloads">
-    <!-- Windows -->
-    <a class="card accent" href="https://github.com/zhen-sir-7/trae-orbit/releases/download/v0.1.0/trae-orbit_0.1.0_x64-setup.exe">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
-          <rect x="2" y="3" width="20" height="14" rx="2"/>
-          <line x1="8" y1="21" x2="16" y2="21"/>
-          <line x1="12" y1="17" x2="12" y2="21"/>
+<!-- 架构 -->
+<section class="section" id="architecture">
+  <div class="container">
+    <div class="section-title">ARCHITECTURE</div>
+    <h2 class="section-heading">三端架构，各司其职</h2>
+    <div class="arch-grid">
+      <!-- 手机端 -->
+      <div class="arch-card">
+        <div class="arch-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2"/>
+            <line x1="12" y1="18" x2="12" y2="18"/>
+          </svg>
+        </div>
+        <div class="arch-badge">PHONE APP</div>
+        <h3>手机端</h3>
+        <div class="arch-role">随身入口</div>
+        <ul class="arch-points">
+          <li>发起任务胶囊</li>
+          <li>查看进度结果</li>
+          <li>审批风险操作</li>
+          <li>设备资源池</li>
+        </ul>
+        <div class="arch-tech">Capacitor · Android</div>
+      </div>
+      <!-- 后端 -->
+      <div class="arch-card center">
+        <div class="arch-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D9744A" stroke-width="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <div class="arch-badge">BACKEND</div>
+        <h3>后端调度</h3>
+        <div class="arch-role">中枢神经</div>
+        <ul class="arch-points">
+          <li>任务调度器</li>
+          <li>设备池管理</li>
+          <li>联邦节点发现</li>
+          <li>登录认证</li>
+        </ul>
+        <div class="arch-tech">Express · SQLite · WS</div>
+      </div>
+      <!-- 电脑端 -->
+      <div class="arch-card">
+        <div class="arch-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <div class="arch-badge">DESKTOP APP</div>
+        <h3>电脑端</h3>
+        <div class="arch-role">执行端</div>
+        <ul class="arch-points">
+          <li>接入 TRAE / CC</li>
+          <li>本机执行代码</li>
+          <li>实时执行日志</li>
+          <li>联邦节点管理</li>
+        </ul>
+        <div class="arch-tech">Tauri · Windows</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心功能 -->
+<section class="section" id="features" style="background:var(--sand-100)">
+  <div class="container">
+    <div class="section-title">FEATURES</div>
+    <h2 class="section-heading">核心功能</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h4>任务胶囊（Task Capsule）</h4>
+        <p>跨端流转的独立任务单元，包含目标、风险等级、执行位置。手机创建 → 后端调度 → 电脑执行 → 结果回传。</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h4>设备池（Device Pool）</h4>
+        <p>同账号下多端自动组建设备池，实时心跳保活，在线/离线状态同步，设备能力声明（CPU/GPU/内存）。</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <h4>联邦节点（Federation）</h4>
+        <p>多台电脑组成联邦，任务可跨节点调度。基于 mDNS 的局域网节点发现，节点间通过 WebSocket 同步状态。</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+            <path d="M9 12l2 2 4-4"/>
+            <path d="M21 12c.554 0 1.002-.446 1.002-1.002v-1.996c0-.556-.446-1.002-1.002-1.002h-2.004A2.003 2.003 0 0 1 17 6.004V5c0-.554-.446-1-1.002-1H8.002C7.446 4 7 4.446 7 5v1.004C7 7.107 6.107 8 5.004 8H3.002C2.446 8 2 8.446 2 9.002v1.996C2 11.554 2.446 12 3.002 12H5c1.105 0 2 .895 2 2v1c0 .554.446 1 1.002 1h8c.554 0 1.002-.446 1.002-1.002v-.996c0-1.105.895-2.002 2-2.002h1.996z"/>
+          </svg>
+        </div>
+        <h4>风险分级与审批</h4>
+        <p>任务胶囊分低/中/高/极高四级风险。高风险操作推送到手机端，一键批准或拒绝，确保安全。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 工作场景 -->
+<section class="section" id="scenario">
+  <div class="container">
+    <div class="section-title">SCENARIO</div>
+    <h2 class="section-heading">一个典型的工作场景</h2>
+    <div class="scenario">
+      <p style="font-size:14px;color:var(--ink-soft);margin-bottom:8px">
+        走在路上想到一个点子 → 手机创建胶囊 → 回到电脑前，代码已经在跑。
+      </p>
+      <div class="scenario-steps">
+        <div class="step active">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h5>在路上</h5>
+            <p>手机端创建任务胶囊"重构 auth 模块"，选择风险等级和执行设备</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h5>后端调度</h5>
+            <p>根据风险等级和设备状态，后端自动调度到你的电脑端</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h5>回到电脑前</h5>
+            <p>电脑端已接入 TRAE/CC，代码正在执行，实时日志可见</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h5>需要审批</h5>
+            <p>高风险操作推送到手机，一键批准或拒绝</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h5>执行完成</h5>
+            <p>结果同步到所有设备，胶囊归档，任务上下文可导出迁移</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 技术栈 -->
+<section class="section" style="background:var(--sand-100)">
+  <div class="container">
+    <div class="section-title">TECH STACK</div>
+    <h2 class="section-heading">技术栈</h2>
+    <div class="tech-stack">
+      <span class="tech-tag">React 18</span>
+      <span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">Vite</span>
+      <span class="tech-tag">Tailwind CSS</span>
+      <span class="tech-tag">Framer Motion</span>
+      <span class="tech-tag">Zustand</span>
+      <span class="tech-tag">Capacitor 8</span>
+      <span class="tech-tag">Tauri 2</span>
+      <span class="tech-tag">Express</span>
+      <span class="tech-tag">SQLite</span>
+      <span class="tech-tag">WebSocket</span>
+      <span class="tech-tag">mDNS</span>
+      <span class="tech-tag">scrypt</span>
+    </div>
+  </div>
+</section>
+
+<!-- 下载 -->
+<section class="download-section" id="download">
+  <div class="container">
+    <div class="section-title">DOWNLOAD</div>
+    <h2 class="section-heading">下载安装包</h2>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:8px">
+      v0.1.0 · 首个发布版本
+    </p>
+    <div class="downloads">
+      <!-- Windows -->
+      <a class="dl-card accent" href="https://github.com/zhen-sir-7/trae-orbit/releases/download/v0.1.0/trae-orbit_0.1.0_x64-setup.exe">
+        <div class="dl-card-head">
+          <div class="dl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div>
+            <div class="dl-badge">WINDOWS</div>
+            <h3>电脑端</h3>
+            <div class="dl-role">执行端 · 接入 TRAE/CC</div>
+          </div>
+        </div>
+        <div class="dl-meta">
+          <div>trae-orbit_0.1.0_x64-setup.exe</div>
+          <div class="dl-size">大小：2.71 MB · NSIS 安装包</div>
+        </div>
+        <div class="dl-btn">下载 EXE</div>
+      </a>
+      <!-- Android -->
+      <a class="dl-card" href="https://github.com/zhen-sir-7/trae-orbit/releases/download/v0.1.0/app-debug.apk">
+        <div class="dl-card-head">
+          <div class="dl-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2"/>
+              <line x1="12" y1="18" x2="12" y2="18"/>
+            </svg>
+          </div>
+          <div>
+            <div class="dl-badge">ANDROID</div>
+            <h3>手机端</h3>
+            <div class="dl-role">随身入口 · 发起任务</div>
+          </div>
+        </div>
+        <div class="dl-meta">
+          <div>app-debug.apk</div>
+          <div class="dl-size">大小：4.82 MB · Debug 签名</div>
+        </div>
+        <div class="dl-btn">下载 APK</div>
+      </a>
+    </div>
+
+    <!-- 使用步骤 -->
+    <div style="margin-top:32px;border:2px solid rgba(26,26,26,0.15);background:var(--sand-50);padding:24px">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12" y2="8"/>
         </svg>
-      </div>
-      <div class="badge">WINDOWS</div>
-      <h2>电脑端</h2>
-      <div class="role">执行端 · 接入 TRAE/CC</div>
-      <div class="meta">
-        <div>trae-orbit_0.1.0_x64-setup.exe</div>
-        <div class="size">大小：2.71 MB · NSIS 安装包</div>
-      </div>
-      <div class="btn">下载 EXE</div>
-    </a>
-
-    <!-- Android -->
-    <a class="card" href="https://github.com/zhen-sir-7/trae-orbit/releases/download/v0.1.0/app-debug.apk">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
-          <rect x="5" y="2" width="14" height="20" rx="2"/>
-          <line x1="12" y1="18" x2="12" y2="18"/>
-        </svg>
-      </div>
-      <div class="badge">ANDROID</div>
-      <h2>手机端</h2>
-      <div class="role">随身入口 · 发起任务</div>
-      <div class="meta">
-        <div>app-debug.apk</div>
-        <div class="size">大小：4.82 MB · Debug 签名</div>
-      </div>
-      <div class="btn">下载 APK</div>
-    </a>
+        使用步骤
+      </h4>
+      <ol style="padding-left:20px;font-size:13px;color:var(--ink-soft);line-height:1.9">
+        <li><strong style="color:var(--ink)">安装电脑端：</strong>下载 EXE 并安装，启动后自动运行后端服务</li>
+        <li><strong style="color:var(--ink)">安装手机端：</strong>下载 APK，允许"未知来源"安装</li>
+        <li><strong style="color:var(--ink)">连接：</strong>手机和电脑连同一 WiFi，打开 App 自动发现后端</li>
+        <li><strong style="color:var(--ink)">使用：</strong>手机端发起任务胶囊，电脑端自动执行</li>
+      </ol>
+    </div>
   </div>
+</section>
 
-  <!-- 使用指南 -->
-  <div class="guide">
-    <h3>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B85C38" stroke-width="2">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="12" y1="16" x2="12" y2="12"/>
-        <line x1="12" y1="8" x2="12" y2="8"/>
-      </svg>
-      使用步骤
-    </h3>
-    <ol>
-      <li><strong>安装电脑端：</strong>下载 EXE 并安装，启动后自动运行后端服务</li>
-      <li><strong>安装手机端：</strong>下载 APK，允许"未知来源"安装</li>
-      <li><strong>连接：</strong>手机和电脑连同一 WiFi，打开 App 自动发现后端</li>
-      <li><strong>使用：</strong>手机端发起任务胶囊，电脑端自动执行</li>
-    </ol>
+<!-- 底部 -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://github.com/zhen-sir-7/trae-orbit">GitHub 仓库</a>
+      <a href="https://github.com/zhen-sir-7/trae-orbit/releases">所有版本</a>
+      <a href="https://github.com/zhen-sir-7/trae-orbit/issues">问题反馈</a>
+    </div>
+    <div>v0.1.0 · MIT License</div>
+    <div class="made-with">Made with TRAE · AI · FOLLOWS · YOU</div>
   </div>
+</footer>
 
-  <!-- 底部 -->
-  <div class="footer">
-    <div>v0.1.0 · <a href="https://github.com/zhen-sir-7/trae-orbit">GitHub 仓库</a> · <a href="https://github.com/zhen-sir-7/trae-orbit/releases">所有版本</a></div>
-    <div class="made-with">Made with TRAE</div>
-  </div>
-</div>
 </body>
 </html>
